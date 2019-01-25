@@ -41,21 +41,26 @@ module.exports = (request, defaultSize = 10) => {
 				if (this.params.offset > 0) {
 					links.first = getLink({offset: 0});
 
-					if (this.params.offset < totalResults - this.limits.count) {
-						links.prev = getLink({offset: this.params.offset - this.limits.count < 0 ? 0 : this.params.offset - this.limits.count});
+					if (this.params.offset >= this.limits.count) {
+						links.prev = getLink({offset: this.params.offset - this.limits.count < 0 ? 0 : this.params.offset > totalResults ? totalResults - this.limits.count : this.params.offset - this.limits.count});
 					}
 				}
 				if (this.params.offset + this.limits.count < totalResults) {
 					links.next = getLink({offset: this.params.offset + this.limits.count});
 				}
-				links.last = getLink({offset: totalResults - this.limits.count});
+
+				if (this.params.offset + this.limits.count < totalResults || this.params.offset > totalResults) {
+					links.last = getLink({
+						offset: this.params.offset + this.limits.count > totalResults && this.params.offset < totalResults ? this.params.offset + this.limits.count : totalResults - this.limits.count
+					});
+				}
 			} else {
-				const pagesCount = totalResults / this.limits.count;
+				const pagesCount = Math.ceil(totalResults / this.limits.count);
 
 				if (this.params.number > 1) {
 					links.first = getLink({number: 1});
 
-					if (this.params.number < pagesCount) {
+					if (this.params.number <= pagesCount || this.params.number > pagesCount) {
 						links.prev = getLink({number: this.params.number - 1});
 					}
 				}
@@ -64,7 +69,9 @@ module.exports = (request, defaultSize = 10) => {
 					links.next = getLink({number: this.params.number + 1});
 				}
 
-				links.last = getLink({number: Math.ceil(pagesCount)});
+				if (this.params.number !== pagesCount) {
+					links.last = getLink({number: Math.ceil(pagesCount)});
+				}
 			}
 			return links;
 		}
