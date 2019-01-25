@@ -1,0 +1,23 @@
+{
+  "name": "jsonapi-pagination",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test-lint",
+    "test-lint": "npx eslint --ext .js ."
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.11.0",
+    "eslint-plugin-node": "^8.0.1"
+  },
+  "dependencies": {
+    "qs": "^6.6.0"
+  }
+}
