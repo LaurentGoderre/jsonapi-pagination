@@ -1,13 +1,17 @@
 const qs = require('qs');
 
-module.exports = (request, defaultSize = 10) => {
+module.exports = (request, defaultSize = 10, maxSize = 100) => {
 	const params = (() => {
 		const params = {};
 		let originalPageQuery;
 		if (request.query.page) {
 			originalPageQuery = request.query.page;
 			if (originalPageQuery.size && !isNaN(originalPageQuery.size) && originalPageQuery.size > 0) {
-				params.size = parseInt(originalPageQuery.size, 10);
+				if (originalPageQuery.size > maxSize) {
+					params.size = maxSize;
+				} else {
+					params.size = parseInt(originalPageQuery.size, 10);
+				}
 			}
 
 			if (originalPageQuery.offset && !isNaN(originalPageQuery.offset) && originalPageQuery.offset >= 0) {

@@ -27,6 +27,20 @@ describe('Pagination', () => {
 		it('should set the \'limits\' property with the custom default size', () => assert.deepStrictEqual(pages.limits, {start: 0, count: 5}));
 	});
 
+	describe('Definining a custom max page size', () => {
+		const request = {
+			...baseMockRequest,
+			query: {
+				page: {
+					size: 20
+				}
+			}
+		};
+		const pages = pagination(request, null, 10);
+
+		it('should set the \'limits\' property with the custom default size', () => assert.deepStrictEqual(pages.limits, {start: 0, count: 10}));
+	});
+
 	describe('Offset-based Pagination', () => {
 		const request = {
 			...baseMockRequest,
