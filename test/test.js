@@ -108,6 +108,27 @@ describe('Pagination', () => {
 			return assert.strictEqual(links.last, `/pagination_test?foo=bar&abc=def&${encodeURIComponent('page[number]')}=2`);
 		});
 
+		it('should not return any links when all results are in one page', () => {
+			const request1 = {
+				...baseMockRequest,
+				query: {}
+			};
+			const request2 = {
+				...baseMockRequest,
+				query: {
+					page: {
+						size: 10,
+					}
+				}
+			};
+
+			const links1 = pagination(request1).getLinks(10);
+			const links2 = pagination(request2).getLinks(10);
+
+			assert.strictEqual(links1, undefined);
+			assert.strictEqual(links2, undefined);
+		});
+
 		describe('Page-based', () => {
 			describe('First of two pages', () => {
 				const request = {

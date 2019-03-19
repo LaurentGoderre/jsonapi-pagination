@@ -73,11 +73,11 @@ module.exports = (request, defaultSize = 10, maxSize = 100) => {
 					links.next = getLink({number: this.params.number + 1});
 				}
 
-				if (this.params.number !== pagesCount) {
-					links.last = getLink({number: Math.ceil(pagesCount)});
+				if ((this.params.number || 1) !== pagesCount) {
+					links.last = getLink({number: pagesCount});
 				}
 			}
-			return links;
+			return Object.keys(links).length > 0 ? links : undefined;
 		}
 	};
 };
