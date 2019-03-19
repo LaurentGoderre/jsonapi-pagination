@@ -60,20 +60,21 @@ module.exports = (request, defaultSize = 10, maxSize = 100) => {
 				}
 			} else {
 				const pagesCount = Math.ceil(totalResults / this.limits.count);
+				const pageNumber = this.params.number || 1;
 
-				if (this.params.number > 1) {
+				if (pageNumber > 1) {
 					links.first = getLink({number: 1});
 
-					if (this.params.number <= pagesCount || this.params.number > pagesCount) {
-						links.prev = getLink({number: this.params.number - 1});
+					if (pageNumber <= pagesCount || pageNumber > pagesCount) {
+						links.prev = getLink({number: pageNumber - 1});
 					}
 				}
 
-				if (this.params.number < pagesCount) {
-					links.next = getLink({number: this.params.number + 1});
+				if (pageNumber < pagesCount) {
+					links.next = getLink({number: pageNumber + 1});
 				}
 
-				if ((this.params.number || 1) !== pagesCount) {
+				if (pageNumber !== pagesCount) {
 					links.last = getLink({number: pagesCount});
 				}
 			}

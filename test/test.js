@@ -131,7 +131,7 @@ describe('Pagination', () => {
 
 		describe('Page-based', () => {
 			describe('First of two pages', () => {
-				const request = {
+				const request1 = {
 					...baseMockRequest,
 					query: {
 						page: {
@@ -140,12 +140,24 @@ describe('Pagination', () => {
 					}
 				};
 
-				const links = pagination(request).getLinks(4);
-				const expected = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
+				const request2 = {
+					...baseMockRequest,
+					query: {}
+				};
 
-				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links), ['next', 'last']));
-				it('should return a link for the next page', () => assert.strictEqual(links.next, expected));
-				it('should return a link for the last page', () => assert.strictEqual(links.last, expected));
+				const links1 = pagination(request1).getLinks(4);
+				const expected1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
+
+				const links2 = pagination(request2).getLinks(20);
+				const expected2 = `/pagination_test?${encodeURIComponent('page[number]')}=2`;
+
+				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links1), ['next', 'last']));
+				it('should return a link for the next page', () => assert.strictEqual(links1.next, expected1));
+				it('should return a link for the last page', () => assert.strictEqual(links1.last, expected1));
+
+				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links2), ['next', 'last']));
+				it('should return a link for the next page', () => assert.strictEqual(links2.next, expected2));
+				it('should return a link for the last page', () => assert.strictEqual(links2.last, expected2));
 			});
 
 			describe('Second of two pages', () => {
@@ -168,7 +180,7 @@ describe('Pagination', () => {
 			});
 
 			describe('First of many pages', () => {
-				const request = {
+				const request1 = {
 					...baseMockRequest,
 					query: {
 						page: {
@@ -176,14 +188,26 @@ describe('Pagination', () => {
 						}
 					}
 				};
+				const request2 = {
+					...baseMockRequest,
+					query: {}
+				};
 
-				const links = pagination(request).getLinks(15);
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const links1 = pagination(request1).getLinks(15);
+				const expectedNext1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
+				const expectedLast1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
 
-				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links), ['next', 'last']));
-				it('should return a link for the next page', () => assert.strictEqual(links.next, expectedNext));
-				it('should return a link for the last page', () => assert.strictEqual(links.last, expectedLast));
+				const links2 = pagination(request2).getLinks(30);
+				const expectedNext2 = `/pagination_test?${encodeURIComponent('page[number]')}=2`;
+				const expectedLast2 = `/pagination_test?${encodeURIComponent('page[number]')}=3`;
+
+				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links1), ['next', 'last']));
+				it('should return a link for the next page', () => assert.strictEqual(links1.next, expectedNext1));
+				it('should return a link for the last page', () => assert.strictEqual(links1.last, expectedLast1));
+
+				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links2), ['next', 'last']));
+				it('should return a link for the next page', () => assert.strictEqual(links2.next, expectedNext2));
+				it('should return a link for the last page', () => assert.strictEqual(links2.last, expectedLast2));
 			});
 
 			describe('Second page of many pages', () => {
