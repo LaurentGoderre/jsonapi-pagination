@@ -38,7 +38,7 @@ module.exports = (request, defaultSize = 10, maxSize = 100) => {
 		getLinks: function(totalResults) {
 			const links = {};
 			const getLink = (param) => {
-				return this.request.path + '?' + qs.stringify({...request.query, page: {...this.params, ...param}}, {encode: false});
+				return this.request.path + '?' + qs.stringify({...request.query, page: {...this.params, ...param}}, {encode: false, indices: false});
 			};
 
 			if (this.params.offset !== undefined) {
