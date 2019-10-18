@@ -1,5 +1,7 @@
 # jsonapi-pagination #
 
+[![Build Status](https://travis-ci.org/StatCan/jsonapi-pagination.svg?branch=master)](https://travis-ci.org/StatCan/jsonapi-pagination)
+
 A module for implementing page-based and/or offset-based pagination for JSONAPI.
 
 ## Getting Started ##
