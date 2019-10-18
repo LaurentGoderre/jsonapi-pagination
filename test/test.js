@@ -105,7 +105,7 @@ describe('Pagination', () => {
 
 			const links = pagination(request).getLinks(11);
 
-			return assert.strictEqual(links.last, `/pagination_test?foo=bar&abc=def&${encodeURIComponent('page[number]')}=2`);
+			return assert.strictEqual(links.last, '/pagination_test?foo=bar&abc=def&page[number]=2');
 		});
 
 		it('should not return any links when all results are in one page', () => {
@@ -146,10 +146,10 @@ describe('Pagination', () => {
 				};
 
 				const links1 = pagination(request1).getLinks(4);
-				const expected1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
+				const expected1 = '/pagination_test?page[size]=3&page[number]=2';
 
 				const links2 = pagination(request2).getLinks(20);
-				const expected2 = `/pagination_test?${encodeURIComponent('page[number]')}=2`;
+				const expected2 = '/pagination_test?page[number]=2';
 
 				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links1), ['next', 'last']));
 				it('should return a link for the next page', () => assert.strictEqual(links1.next, expected1));
@@ -172,7 +172,7 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(4);
-				const expected = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
+				const expected = '/pagination_test?page[size]=3&page[number]=1';
 
 				it('should only return a link for first and previous page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expected));
@@ -194,12 +194,12 @@ describe('Pagination', () => {
 				};
 
 				const links1 = pagination(request1).getLinks(15);
-				const expectedNext1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
-				const expectedLast1 = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const expectedNext1 = '/pagination_test?page[size]=3&page[number]=2';
+				const expectedLast1 = '/pagination_test?page[size]=3&page[number]=5';
 
 				const links2 = pagination(request2).getLinks(30);
-				const expectedNext2 = `/pagination_test?${encodeURIComponent('page[number]')}=2`;
-				const expectedLast2 = `/pagination_test?${encodeURIComponent('page[number]')}=3`;
+				const expectedNext2 = '/pagination_test?page[number]=2';
+				const expectedLast2 = '/pagination_test?page[number]=3';
 
 				it('should only return a link for next and last page', () => assert.deepStrictEqual(Object.keys(links1), ['next', 'last']));
 				it('should return a link for the next page', () => assert.strictEqual(links1.next, expectedNext1));
@@ -222,10 +222,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=3`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedPrev = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedNext = '/pagination_test?page[size]=3&page[number]=3';
+				const expectedLast = '/pagination_test?page[size]=3&page[number]=5';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -246,10 +246,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=2`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=4`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedPrev = '/pagination_test?page[size]=3&page[number]=2';
+				const expectedNext = '/pagination_test?page[size]=3&page[number]=4';
+				const expectedLast = '/pagination_test?page[size]=3&page[number]=5';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -270,10 +270,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=3`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedPrev = '/pagination_test?page[size]=3&page[number]=3';
+				const expectedNext = '/pagination_test?page[size]=3&page[number]=5';
+				const expectedLast = '/pagination_test?page[size]=3&page[number]=5';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -294,8 +294,8 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=4`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedPrev = '/pagination_test?page[size]=3&page[number]=4';
 
 				it('should return a first and previous', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -314,9 +314,9 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=1`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[number]')}=5`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[number]=1';
+				const expectedPrev = '/pagination_test?page[size]=3&page[number]=5';
+				const expectedLast = '/pagination_test?page[size]=3&page[number]=5';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -338,7 +338,7 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(6);
-				const expected = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
+				const expected = '/pagination_test?page[size]=3&page[offset]=0';
 
 				it('should only return a link for first and previous page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expected));
@@ -357,9 +357,9 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(6);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=4`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=3`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedNext = '/pagination_test?page[size]=3&page[offset]=4';
+				const expectedLast = '/pagination_test?page[size]=3&page[offset]=3';
 
 				it('should return a link for first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -379,8 +379,8 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(6);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=1`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=1';
 
 				it('should only return a link for first and previous page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -399,9 +399,9 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(6);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=3`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=3`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=3';
+				const expectedLast = '/pagination_test?page[size]=3&page[offset]=3';
 
 				it('should only return a link for first and previous page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -421,10 +421,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=6`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=12`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedNext = '/pagination_test?page[size]=3&page[offset]=6';
+				const expectedLast = '/pagination_test?page[size]=3&page[offset]=12';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -445,10 +445,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=3`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=9`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=12`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=3';
+				const expectedNext = '/pagination_test?page[size]=3&page[offset]=9';
+				const expectedLast = '/pagination_test?page[size]=3&page[offset]=12';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -469,10 +469,10 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=6`;
-				const expectedNext = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=12`;
-				const expectedLast = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=12`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=6';
+				const expectedNext = '/pagination_test?page[size]=3&page[offset]=12';
+				const expectedLast = '/pagination_test?page[size]=3&page[offset]=12';
 
 				it('should return a first, previous, next and last page', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev', 'next', 'last']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
@@ -493,8 +493,8 @@ describe('Pagination', () => {
 				};
 
 				const links = pagination(request).getLinks(15);
-				const expectedFirst = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=0`;
-				const expectedPrev = `/pagination_test?${encodeURIComponent('page[size]')}=3&${encodeURIComponent('page[offset]')}=9`;
+				const expectedFirst = '/pagination_test?page[size]=3&page[offset]=0';
+				const expectedPrev = '/pagination_test?page[size]=3&page[offset]=9';
 
 				it('should return a first and previous', () => assert.deepStrictEqual(Object.keys(links), ['first', 'prev']));
 				it('should return a link for the first page', () => assert.strictEqual(links.first, expectedFirst));
